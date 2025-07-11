@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gen's Combo Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <p>The Animator's</p>
+            <h1>Combo Generator</h1>
+            <p>Originally created for Hyun's Dojo and Stickpage by <a class="rose-link" target="_blank"
+                    href="https://rose.dev">Genevra
+                    Rose</a></p>
+            <span class="small">Suggestions - <a class="rose-link" href="https://forms.gle/gB9RayfFNtqENAzE8"
+                    target="_blank">Submit your
+                    ideas here</a></span>
+        </header>
+
+        <main>
+            <div class="controls">
+                <div class="generation-controls">
+                    <label for="combo-length">Combo Length:</label>
+                    <div class="combo-length-spinner">
+                        <button id="combo-length-down" class="spinner-btn spinner-down">−</button>
+                        <input type="number" id="combo-length" min="3" max="100" value="5">
+                        <button id="combo-length-up" class="spinner-btn spinner-up">+</button>
+                    </div>
+                    <button id="generate-combo" class="generate-btn">Generate Combo</button>
+                    <button id="copy-url" class="copy-url-btn">Copy Move URL</button>
+                </div>
+
+                <div class="combo-display">
+                    <!--<h3>Generated Combo:</h3> Surely people don't need this-->
+                    <div class="combo-output-container">
+                        <div id="combo-output" class="combo-output">
+                        </div>
+                        <button id="copy-combo-text" class="copy-combo-btn" title="Copy combo text">📋</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="move-categories">
+                <div class="category-section">
+                    <h3>Simple</h3>
+                    <div class="category-header">
+                        <input type="checkbox" id="melee-category" class="category-checkbox" checked>
+                        <label for="melee-category" class="category-label">Enable All Simple</label>
+                    </div>
+                    <div class="moves-grid" id="melee-moves">
+                        <div class="move-item">
+                            <input type="checkbox" id="heavy-kick" checked>
+                            <label for="heavy-kick">Heavy Kick</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="light-kick" checked>
+                            <label for="light-kick">Light Kick</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="light-punch" checked>
+                            <label for="light-punch">Light Punch</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="heavy-punch" checked>
+                            <label for="heavy-punch">Heavy Punch</label>
+                        </div>
+                        <div class="move-item chain-move">
+                            <input type="checkbox" id="grab" checked>
+                            <label for="grab">Grab</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="elbow" checked>
+                            <label for="elbow">Elbow</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="knee" checked>
+                            <label for="knee">Knee</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="hip-check" checked>
+                            <label for="hip-check">Hip Check</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="push" checked>
+                            <label for="push">Push</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="block" checked>
+                            <label for="block">Block</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="headbutt" checked>
+                            <label for="headbutt">Headbutt</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-section">
+                    <h3>Advanced</h3>
+                    <div class="category-header">
+                        <input type="checkbox" id="advanced-category" class="category-checkbox" checked>
+                        <label for="advanced-category" class="category-label">Enable All Advanced</label>
+                    </div>
+                    <div class="moves-grid" id="advanced-moves">
+                        <div class="move-item">
+                            <input type="checkbox" id="uppercut" checked>
+                            <label for="uppercut">Uppercut</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="jab" checked>
+                            <label for="jab">Jab</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="bone-breaker" checked>
+                            <label for="bone-breaker">Bone Breaker</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="charge" checked>
+                            <label for="charge">Charge</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="backflip-kick" checked>
+                            <label for="backflip-kick">Backflip Kick</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="frontflip-kick" checked>
+                            <label for="frontflip-kick">Frontflip Kick</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="roundhouse-kick" checked>
+                            <label for="roundhouse-kick">Roundhouse Kick</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="karate-chop" checked>
+                            <label for="karate-chop">Karate Chop</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="spin-kick" checked>
+                            <label for="spin-kick">Spin Kick</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="drop-kick" checked>
+                            <label for="drop-kick">Drop Kick</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="leg-sweep" checked>
+                            <label for="leg-sweep">Leg Sweep</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="punch-barrage" checked>
+                            <label for="punch-barrage">Punch Barrage</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="fake-out-attack" checked>
+                            <label for="fake-out-attack">Fake-Out Attack</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-section">
+                    <h3>Elemental</h3>
+                    <div class="category-header">
+                        <input type="checkbox" id="elemental-category" class="category-checkbox" checked>
+                        <label for="elemental-category" class="category-label">Enable All Elemental</label>
+                    </div>
+                    <div class="moves-grid" id="elemental-moves">
+                        <div class="move-item">
+                            <input type="checkbox" id="laser-beam" checked>
+                            <label for="laser-beam">Laser Beam</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="electrocute" checked>
+                            <label for="electrocute">Electrocute</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="fire-element-attack" checked>
+                            <label for="fire-element-attack">Fire Element Attack</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="meteor-summon" checked>
+                            <label for="meteor-summon">Meteor Summon</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="lightning-bolt" checked>
+                            <label for="lightning-bolt">Lightning Bolt</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="ground-slam" checked>
+                            <label for="ground-slam">Ground Slam</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="boulder-throw" checked>
+                            <label for="boulder-throw">Boulder Throw</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="water-blast" checked>
+                            <label for="water-blast">Water Blast</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="ice-spike" checked>
+                            <label for="ice-spike">Ice Spike</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="acid-attack" checked>
+                            <label for="acid-attack">Acid Attack</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="lava-blast" checked>
+                            <label for="lava-blast">Lava Blast</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="next-move-fire-charged" checked>
+                            <label for="next-move-fire-charged">Next Move Fire Charged</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="next-move-electrically-charged" checked>
+                            <label for="next-move-electrically-charged">Next Move Electrically Charged</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="time-stop" checked>
+                            <label for="time-stop">Time Stop</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-section">
+                    <h3>Silly Combos</h3>
+                    <div class="category-header">
+                        <input type="checkbox" id="silly-category" class="category-checkbox" checked>
+                        <label for="silly-category" class="category-label">Enable All Silly Combos</label>
+                    </div>
+                    <div class="moves-grid" id="silly-moves">
+                        <div class="move-item">
+                            <input type="checkbox" id="eye-poke" checked>
+                            <label for="eye-poke">Eye Poke</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="groin-hit" checked>
+                            <label for="groin-hit">Groin Hit</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="slap" checked>
+                            <label for="slap">Slap</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="bite" checked>
+                            <label for="bite">Bite</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="fish-slap" checked>
+                            <label for="fish-slap">Fish Slap</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-section">
+                    <h3>Movement</h3>
+                    <div class="category-header">
+                        <input type="checkbox" id="movement-category" class="category-checkbox" checked>
+                        <label for="movement-category" class="category-label">Enable All Movement</label>
+                    </div>
+                    <div class="moves-grid" id="movement-moves">
+                        <div class="move-item">
+                            <input type="checkbox" id="backflip" checked>
+                            <label for="backflip">Backflip</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="frontflip" checked>
+                            <label for="frontflip">Frontflip</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="slide" checked>
+                            <label for="slide">Slide</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="trip" checked>
+                            <label for="trip">Trip</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="spin" checked>
+                            <label for="spin">Spin</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="jump" checked>
+                            <label for="jump">Jump</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="dodge" checked>
+                            <label for="dodge">Dodge</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="wallrun" checked>
+                            <label for="wallrun">Wallrun</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="taunt" checked>
+                            <label for="taunt">Taunt</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="dash" checked>
+                            <label for="dash">Dash</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="epic-fight-stance" checked>
+                            <label for="epic-fight-stance">Epic Fight Stance</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-section">
+                    <h3>Custom Moves</h3>
+                    <div class="category-header">
+                        <input type="checkbox" id="custom-category" class="category-checkbox" checked>
+                        <label for="custom-category" class="category-label">Enable All Custom Moves</label>
+                    </div>
+                    <div class="moves-grid" id="custom-moves">
+                        <div class="custom-move-input-container">
+                            <input type="text" class="custom-move-input" placeholder="Enter custom move name..."
+                                maxlength="50">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-section">
+                    <h3>Finishers</h3>
+                    <div class="category-header">
+                        <input type="checkbox" id="finishers-category" class="category-checkbox" checked>
+                        <label for="finishers-category" class="category-label">Enable All Finishers</label>
+                    </div>
+                    <div class="moves-grid" id="finishers-moves">
+                        <div class="move-item">
+                            <input type="checkbox" id="neck-snap" checked>
+                            <label for="neck-snap">Neck Snap</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="falcon-punch" checked>
+                            <label for="falcon-punch">Falcon Punch</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="knock-out" checked>
+                            <label for="knock-out">Knock Out</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="break-in-half" checked>
+                            <label for="break-in-half">Break In Half</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="back-break" checked>
+                            <label for="back-break">Back Break</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="slice" checked>
+                            <label for="slice">Slice</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="decapitate" checked>
+                            <label for="decapitate">Decapitate</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="explode" checked>
+                            <label for="explode">Explode</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="disintegrate" checked>
+                            <label for="disintegrate">Disintegrate</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="mic-drop" checked>
+                            <label for="mic-drop">Mic Drop</label>
+                        </div>
+                        <div class="move-item">
+                            <input type="checkbox" id="wild-bonfire-blast" checked>
+                            <label for="wild-bonfire-blast">Wild Bonfire Blast</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="move-popover" class="move-popover">
+        <div class="move-popover-title"></div>
+        <div class="move-popover-description"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

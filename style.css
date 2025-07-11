@@ -1,0 +1,606 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #769cda 0%, #5d73d4 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header p {
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+.controls {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.rose-link {
+    color: #ffb9b9;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.rose-link:hover {
+    color: #ffffff;
+}
+
+.generation-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.generation-controls label {
+    font-weight: 600;
+    color: #555;
+}
+
+.small {
+    font-size: 0.9em;
+    color: #dadada;
+}
+
+/* Custom spinner controls */
+.combo-length-spinner {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    transition: border-color 0.3s ease;
+}
+
+.combo-length-spinner:hover {
+    border-color: #769cda;
+}
+
+.combo-length-spinner:focus-within {
+    border-color: #769cda;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.generation-controls input[type="number"] {
+    width: 60px;
+    padding: 8px 12px;
+    border: none;
+    font-size: 16px;
+    text-align: center;
+    background: transparent;
+    color: #2d3748;
+    font-weight: 600;
+    appearance: textfield;
+}
+
+.generation-controls input[type="number"]:focus {
+    outline: none;
+}
+
+/* Hide browser default spinners */
+.generation-controls input[type="number"]::-webkit-outer-spin-button,
+.generation-controls input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.spinner-btn {
+    width: 32px;
+    height: 36px;
+    border: none;
+    background: #769cda;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.spinner-btn:hover {
+    background: #5078b8;
+    transform: scale(1.05);
+}
+
+.spinner-btn:active {
+    transform: scale(0.95);
+}
+
+.spinner-down {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.spinner-up {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.generate-btn {
+    background: #769cda;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.generate-btn:hover {
+    background: #5078b8;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(119, 255, 107, 0.4);
+}
+
+.copy-url-btn {
+    background: #769cda;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.copy-url-btn:hover {
+    background: #5078b8;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+}
+
+.combo-display h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.combo-output-container {
+    position: relative;
+}
+
+.combo-output {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    min-height: 60px;
+    font-size: 16px;
+    line-height: 1.8;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.copy-combo-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    /*background: #7fa6e4;*/
+    background: white;
+    color: white;
+    border: 1px solid #6877e1;
+    border-radius: 6px;
+    padding: 3px 3px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    z-index: 10;
+}
+
+.copy-combo-btn:hover {
+    background: #6991d1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.copy-combo-btn:active {
+    transform: translateY(0);
+}
+
+.combo-output.success {
+    background: #769cda;
+    color: white;
+    border-color: #769cda;
+}
+
+.combo-output.error {
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    color: white;
+    border-color: #c0392b;
+}
+
+.combo-move {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 8px;
+    border-radius: 5px;
+    margin: 2px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.combo-move.chain-move {
+    background: rgba(7, 69, 255, 0.3);
+    color: #ffffff;
+}
+
+.combo-move.throw-move {
+    background: rgba(7, 69, 255, 0.3);
+    color: #ffffff;
+}
+
+.combo-move.finisher-move {
+    background: rgba(220, 53, 69, 0.3);
+    /*color: #fbc9ce;*/
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.combo-separator {
+    font-weight: bold;
+    margin: 0 5px;
+    color: rgba(255, 255, 255, 0.8);
+    white-space: nowrap;
+}
+
+.move-categories {
+    display: grid;
+    /* ehhh I tried to be modern but it just feels weird */
+    /*grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));*/
+    gap: 20px;
+}
+
+.category-section {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.category-section:hover {
+    transform: translateY(-5px);
+}
+
+.category-section h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #769cda;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #769cda;
+    border-radius: 8px;
+    color: white;
+}
+
+.category-header input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+}
+
+.category-label {
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+}
+
+.moves-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 8px;
+}
+
+.move-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 6px;
+    background: #f8f9fa;
+    transition: all 0.2s ease;
+    border: 1px solid #e9ecef;
+}
+
+.move-item:hover {
+    background: #e9ecef;
+    transform: translateX(3px);
+}
+
+.move-item input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.1);
+}
+
+.move-item label {
+    cursor: pointer;
+    user-select: none;
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+}
+
+.move-item input[type="checkbox"]:checked+label {
+    color: #769cda;
+    font-weight: 600;
+}
+
+/* Unsure if the user cares */
+/*.move-item.chain-move {
+    border-color: #ffc107;
+}
+
+.move-item.chain-move label {
+    color: #856404;
+    font-weight: 600;
+}*/
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    .generation-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .generation-controls input[type="number"] {
+        width: 100%;
+    }
+
+    .move-categories {
+        grid-template-columns: 1fr;
+    }
+
+    .moves-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .combo-move {
+        display: inline-block;
+        margin: 3px 2px;
+        font-size: 14px;
+        padding: 3px 6px;
+    }
+
+    .combo-separator {
+        display: inline-block;
+        margin: 0 3px;
+        font-size: 14px;
+    }
+
+    .combo-output {
+        font-size: 14px;
+        line-height: 1.6;
+        padding: 15px;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+}
+
+/* Accessibility improvements */
+input[type="checkbox"]:focus {
+    outline: 2px solid #769cda;
+    outline-offset: 2px;
+}
+
+button:focus {
+    outline: 2px solid #769cda;
+    outline-offset: 2px;
+}
+
+/* Animation for combo generation */
+.combo-output {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Move descriptor popover */
+.move-popover {
+    position: fixed;
+    background: #769cda;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    line-height: 1.4;
+    z-index: 1000;
+    max-width: 280px;
+    display: none;
+    pointer-events: none;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.move-popover.show {
+    opacity: 1;
+    transform: translateY(0);
+    animation: popoverEntrance 0.3s ease-out;
+}
+
+.move-popover-title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.move-popover-description {
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* would have to do origin points performantly and attach the element depending on the side of the browser like how right click works we can style it*/
+/*.move-popover::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #769cda ;
+}*/
+
+/* Special user submitted moves */
+.move-with-descriptor {
+    cursor: help;
+    position: relative;
+    background: linear-gradient(45deg, #ffeaa7, #fdcb6e) !important;
+    color: #d63031 !important;
+    border: 1px solid #e17055 !important;
+    transition: all 0.2s ease;
+}
+
+.move-with-descriptor:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(253, 203, 110, 0.4);
+}
+
+@keyframes popoverEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.8);
+    }
+
+    50% {
+        transform: translateY(-5px) scale(1.05);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Custom moves */
+.custom-move-input-container {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.custom-move-input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.custom-move-input:focus {
+    outline: none;
+    border-color: #769cda;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.custom-move-input::placeholder {
+    color: #a0aec0;
+    font-style: italic;
+}
+
+.custom-move-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.custom-move-item .move-item {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.custom-move-delete {
+    background: #fe8476;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.custom-move-delete:hover {
+    background: #f51414;
+    transform: scale(1.05);
+}
+
+.custom-move-delete:active {
+    transform: scale(0.95);
+}
